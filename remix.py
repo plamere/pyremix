@@ -74,6 +74,14 @@ class Remix(object):
         self._connect_quanta_with_children(track, 'bars', 'beats')
         self._connect_quanta_with_children(track, 'beats', 'tatums')
 
+        self._connect_overlapping_segments(track, 'bars')
+        self._connect_overlapping_segments(track, 'beats')
+        self._connect_overlapping_segments(track, 'tatums')
+
+        self._annotate_quanta_from_overlapping_segments(track, 'bars')
+        self._annotate_quanta_from_overlapping_segments(track, 'beats')
+        self._annotate_quanta_from_overlapping_segments(track, 'tatums')
+
         return track
 
 
@@ -90,7 +98,6 @@ class Remix(object):
         return out
 
     def q_silence(self, duration):
-
         q = { }
         q['type'] = 'synthetic';
         q['start'] = 0
@@ -129,6 +136,8 @@ class Remix(object):
             q['index_in_parent'] = -1;
             q['parent'] = None;
             q['children'] = [];
+            q['overlapping_segments'] = [];
+
 
             if i > 0:
                 q['prev'] = qlist[i-1]
@@ -152,6 +161,51 @@ class Remix(object):
                     cur_child['index_in_parent'] = len(p['children'])
                     p['children'].append(cur_child)
                 cur_child = cur_child['next']
+
+
+    def _connect_overlapping_segments(self, track, type):
+        plist = track['analysis'][type]
+        slist = track['analysis']['segments']
+
+        cur_seg  = slist[0]
+        p = plist[0]
+        while p:
+            while cur_seg and p and cur_seg['start'] <= p['end']:
+                if cur_seg['end'] > p['start']:
+                    p['overlapping_segments'].append(cur_seg)
+                    p = p['next']
+                else:
+                    cur_seg = cur_seg['next']
+
+    def _connect_overlapping_segments(self, track, type):
+        plist = track['analysis'][type]
+        for p in plist:
+            p['overlapping_segments'] = self._find_overlapping(track, p, 'segments')
+
+
+    def _find_overlapping(self, track, tgt, type):
+        results = []
+        for q in track['analysis'][type]:
+            if q['start'] > tgt['end']:
+                break
+            if q['end'] < tgt['start']:
+                continue
+            results.append(q)
+        return results
+
+    def _annotate_quanta_from_overlapping_segments(self, track, type):
+        for q in track['analysis'][type]:
+            if len(q['overlapping_segments']) == 0:
+                q['loudness_min'] = -60
+                q['loudness_max'] = -60
+            else:
+                q['loudness_min'] = 0
+                q['loudness_max'] = -60
+                for seg in q['overlapping_segments']:
+                    if seg['loudness_start'] < q['loudness_min']:
+                        q['loudness_min'] = seg['loudness_start']
+                    if seg['loudness_max'] > q['loudness_max']:
+                        q['loudness_max'] = seg['loudness_max']
 
     def _load_trid_cache(self):
         cache = {}
@@ -264,7 +318,12 @@ class Remix(object):
             print "No cache directory configured, performance will be affected"
 
     def print_quanta(self, q):
-        print "%s %d s:%.4f dur:%.4f iip:%d" % (q['type'], q['which'], q['start'], q['duration'], q['index_in_parent'])
+        print "%s %d s:%.4f dur:%.4f iip:%d" % (q['type'], q['which'], q['start'], q['duration'], q['index_in_parent']),
+        if q['type'] != 'segments':
+            print " children:%d  ovlps: %d maxl %d minl %d" % (len(q['children']), len(q['overlapping_segments']), 
+                q['loudness_max'], q['loudness_min'])
+        else:
+            print
 
 
 def _test(path):

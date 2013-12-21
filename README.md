@@ -8,6 +8,8 @@ This is a refactoring of The Echo Nest's remix library. The goal of this refacto
  - eliminate dependencies on numpy and scipy that can make it difficult to install
  - reduce the overall footprint of the package so it can be distributed via pypi
  
+** Note that this library is not an official Echo Nest library **
+ 
 ## Example
 Here's the classic 'one.py' that makes a new song that consists of just the first beats of every bar of the source song.
 
