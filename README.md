@@ -62,6 +62,7 @@ Here's some sample output (beat1_romance.mp3):
 
 In this example, we add a blip to every bar, beat or tatum:
 
+'''python
 	import pyremix
     remixer = pyremix.Remix()
 
@@ -72,6 +73,7 @@ In this example, we add a blip to every bar, beat or tatum:
     for q in track['analysis'][type]:
         song.append(remixer.q_combine(q, blip))
     remixer.render(song).export(outpath)
+ '''
 
 Example output:
     
