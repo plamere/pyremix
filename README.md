@@ -15,6 +15,7 @@ which you can find on [github](http://echonest.github.io/remix/).
  
 ## Examples
 
+### Reverse
 
 Reversing a song, beat by beat:
 
@@ -26,9 +27,16 @@ Reversing a song, beat by beat:
     beats.reverse()
     remixer.render(beats).export("backwards.mp3")
     
-Here's the input: <a href="audio/BadRomanceClip.mp3"> Bad Romance</a>. Here's the output: <a href="audio/backwards.mp3"> Bad Romance, beat reversed</a>
+Here's the input (BadRomanceClip.mp3): 
+
+<audio src="http://static.echonest.com/pyremix/audio/BadRomanceClip.mp3" controls/>. 
+
+Here's the output (backwards.mp3):
+
+<audio src="http://static.echonest.com/pyremix/audio/backwards.mp3" controls/> 
     
     
+### One
 
 Here's the classic 'one.py' that makes a new song that consists of just the first beats of every bar of the source song.
 
@@ -46,6 +54,12 @@ Here's the classic 'one.py' that makes a new song that consists of just the firs
 
 More examples can be found in the [examples](https://github.com/plamere/pyremix/tree/master/examples) directory in the Github repository.
 
+Here's some sample output (beat1_romance.mp3):
+
+<audio src="http://static.echonest.com/pyremix/audio/beat1_romance.mp3" controls/> 
+
+### Blip
+
 In this example, we add a blip to every bar, beat or tatum:
 
 	import pyremix
@@ -53,13 +67,29 @@ In this example, we add a blip to every bar, beat or tatum:
 
 	type = 'beats' # could be 'bars', 'sections', 'tatums' or 'segments'
     track = remixer.analyze_track(inpath)
-    blip =  remixer.q_from_file("sounds/blip_high.wav", "wav")
+    blip =  remixer.q_from_file("examples/sounds/blip_high.wav", "wav")
     song = []
     for q in track['analysis'][type]:
         song.append(remixer.q_combine(q, blip))
     remixer.render(song).export(outpath)
 
-            
+Example output:
+    
+<audio src="http://static.echonest.com/pyremix/audio/blip_romance.mp3" controls/> 
+
+## Documentation
+
+See the [Full API documentation](http://static.echonest.com/pyremix/docs/pyremix.html)
+
+## Caching
+pyremix keeps a local cache of track analyses. This eliminates the need for pyremix to re-upload audio.  By default the cache is kept in ~/.remix-cache            
+## Dependencies
+pyremix depends on the following libraries
+
+ - [pyen](https://github.com/plamere/pyen) - a simple, thin, un-opinionated python client for The Echo Nest API 
+ - [pydub](https://github.com/jiaaro/pydub/) - Manipulate audio with a simple and easy high level interface 
+ 
+ 
 ## TODO
 There's still lots to do:
 

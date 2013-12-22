@@ -11,7 +11,7 @@ def blip(inpath, type, outpath):
     remixer = pyremix.Remix(trace=True)
 
     track = remixer.analyze_track(inpath)
-    bell =  remixer.q_from_file("sounds/blip_high.wav", "wav")
+    bell =  remixer.q_from_file("examples/sounds/blip_high.wav", "wav")
 
     song = []
 
