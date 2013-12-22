@@ -57,7 +57,7 @@ def one(inpath, outpath):
     remixer.render(beats).export(outpath)
 ```
 
-Here's some sample output (beat1_romance.mp3):
+Here's some sample output (blip_romance.mp3):
 
 <a href="http://static.echonest.com/pyremix/audio/beat1_romance.mp3">beat1_romance.mp3</a>
 
