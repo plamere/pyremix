@@ -62,21 +62,21 @@ Here's some sample output (beat1_romance.mp3):
 
 In this example, we add a blip to every bar, beat or tatum:
 
-'''python
-	import pyremix
-    remixer = pyremix.Remix()
+```python
+import pyremix
+remixer = pyremix.Remix()
 
-	type = 'beats' # could be 'bars', 'sections', 'tatums' or 'segments'
-    track = remixer.analyze_track(inpath)
-    blip =  remixer.q_from_file("examples/sounds/blip_high.wav", "wav")
-    song = []
-    for q in track['analysis'][type]:
-        song.append(remixer.q_combine(q, blip))
-    remixer.render(song).export(outpath)
- '''
+type = 'beats' # could be 'bars', 'sections', 'tatums' or 'segments'
+track = remixer.analyze_track(inpath)
+blip =  remixer.q_from_file("examples/sounds/blip_high.wav", "wav")
+song = []
+for q in track['analysis'][type]:
+    song.append(remixer.q_combine(q, blip))
+remixer.render(song).export(outpath)
+```
 
 Example output:
-    
+
 <audio src="http://static.echonest.com/pyremix/audio/blip_romance.mp3" controls/> 
 
 ## Documentation
@@ -88,15 +88,15 @@ pyremix keeps a local cache of track analyses. This eliminates the need for pyre
 ## Dependencies
 pyremix depends on the following libraries
 
- - [pyen](https://github.com/plamere/pyen) - a simple, thin, un-opinionated python client for The Echo Nest API 
- - [pydub](https://github.com/jiaaro/pydub/) - Manipulate audio with a simple and easy high level interface 
- 
- 
+- [pyen](https://github.com/plamere/pyen) - a simple, thin, un-opinionated python client for The Echo Nest API 
+- [pydub](https://github.com/jiaaro/pydub/) - Manipulate audio with a simple and easy high level interface 
+
+
 ## TODO
 There's still lots to do:
 
-  - Add DIRAC support for time stretching and pitch shifting
-  - Fill out the examples to include all examples from remix
-  - Improve the docs
- 
- 
+- Add DIRAC support for time stretching and pitch shifting
+- Fill out the examples to include all examples from remix
+- Improve the docs
+
+
