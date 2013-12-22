@@ -56,7 +56,7 @@ More examples can be found in the [examples](https://github.com/plamere/pyremix/
 
 Here's some sample output (beat1_romance.mp3):
 
-<audio src="http://static.echonest.com/pyremix/audio/beat1_romance.mp3" controls/> 
+<div><audio src="http://static.echonest.com/pyremix/audio/beat1_romance.mp3" controls/></div>
 
 ### Blip
 
