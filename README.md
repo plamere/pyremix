@@ -20,18 +20,18 @@ which you can find on [github](http://echonest.github.io/remix/).
 Reversing a song, beat by beat:
 
 ```python
-	import pyremix
-	
-    remixer = pyremix.Remix()
-    track = remixer.analyze_track("audio/BadRomanceClip.mp3")
-    beats = track['analysis']['beats']
-    beats.reverse()
-    remixer.render(beats).export("backwards.mp3")
+import pyremix
+
+remixer = pyremix.Remix()
+track = remixer.analyze_track("audio/BadRomanceClip.mp3")
+beats = track['analysis']['beats']
+beats.reverse()
+remixer.render(beats).export("backwards.mp3")
 ```
     
 Here's the input (BadRomanceClip.mp3): 
 
-<a href="http://static.echonest.com/pyremix/audio/BadRomanceClip.mp3"/>BadRomanceClip.mp3</a>
+<a href="http://static.echonest.com/pyremix/audio/BadRomanceClip.mp3">BadRomanceClip.mp3</a>
 
 Here's the output (backwards.mp3):
 
@@ -44,17 +44,17 @@ Here's the classic 'one.py' that makes a new song that consists of just the firs
 
 ```python
 
-    import pyremix
+import pyremix
 
-    def one(inpath, outpath):
-        remixer = pyremix.Remix()
-        track = remixer.analyze_track(inpath)
-        
-        beats = []
-        for i, beat in enumerate(track['analysis']['beats']):
-            if beat['index_in_parent'] == 0:
-                beats.append(beat)
-        remixer.render(beats).export(outpath)
+def one(inpath, outpath):
+    remixer = pyremix.Remix()
+    track = remixer.analyze_track(inpath)
+    
+    beats = []
+    for i, beat in enumerate(track['analysis']['beats']):
+        if beat['index_in_parent'] == 0:
+            beats.append(beat)
+    remixer.render(beats).export(outpath)
 ```
 
 More examples can be found in the [examples](https://github.com/plamere/pyremix/tree/master/examples) directory in the Github repository.
