@@ -1,11 +1,11 @@
-import remix
+import pyremix
 import sys
 
 def overlay(inpath, outpath):
     '''
         overlays each beat with the next beat
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
 
     track = remixer.analyze_track(inpath)
     out = []

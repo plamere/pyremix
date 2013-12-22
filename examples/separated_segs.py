@@ -1,11 +1,11 @@
-import remix
+import pyremix
 import sys
 
 def separated_segments(inpath, outpath):
     '''
         separate ever segment by short stretch of silence
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
 
     track = remixer.analyze_track(inpath)
     silence = remixer.q_silence(.33)

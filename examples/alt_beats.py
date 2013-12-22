@@ -1,4 +1,4 @@
-import remix
+import pyremix
 import sys
 
 def alt_beats(inpath1, inpath2, outpath):
@@ -6,7 +6,7 @@ def alt_beats(inpath1, inpath2, outpath):
         render a new version of the input song that consists
         of the beats in reverse order
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
 
     track1 = remixer.analyze_track(inpath1)
     track2 = remixer.analyze_track(inpath2)

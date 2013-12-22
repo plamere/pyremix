@@ -58,19 +58,16 @@ class Remix(object):
         analysis = self._get_analysis(trid)
 
         if self._trace:
-            print 'bars', len(analysis['bars'])
-            print 'beats', len(analysis['beats'])
-            print 'tatums', len(analysis['tatums'])
-            print 'segments', len(analysis['segments'])
+            print "Analysis:  sections:%d bars:%d beats:%d tatums:%d segments:%d" % (
+                len(analysis['sections']), len(analysis['bars']), len(analysis['beats']),
+                len(analysis['tatums']), len(analysis['segments']))
 
         audio = AudioSegment.from_file(path, type)
 
         if self._trace:
-            print 'frame count', audio.frame_count()
-            print 'channels', audio.channels;
-            print 'sample width', audio.sample_width
-            print 'frame_rate', audio.frame_rate
-            print 'frame_width', audio.frame_width
+            print "Audio:     frames:%d channels:%d samplewidth:%d framerate:%d framewidth:%d" % (
+                audio.frame_count(), audio.channels, audio.sample_width, 
+                audio.frame_rate, audio.frame_width)
             
 
         track = {
@@ -90,10 +87,12 @@ class Remix(object):
         self._connect_quanta_with_children(track, 'bars', 'beats')
         self._connect_quanta_with_children(track, 'beats', 'tatums')
 
+        self._connect_overlapping_segments(track, 'sections')
         self._connect_overlapping_segments(track, 'bars')
         self._connect_overlapping_segments(track, 'beats')
         self._connect_overlapping_segments(track, 'tatums')
 
+        self._annotate_quanta_from_overlapping_segments(track, 'sections')
         self._annotate_quanta_from_overlapping_segments(track, 'bars')
         self._annotate_quanta_from_overlapping_segments(track, 'beats')
         self._annotate_quanta_from_overlapping_segments(track, 'tatums')
@@ -252,7 +251,6 @@ class Remix(object):
             Returns:
                 dict: the combined quantum
         '''
-        qc = q.copy()
         qc = q1.copy()
         audio1  = self._get_qaudio(q1)
         audio2  = self._get_qaudio(q2)

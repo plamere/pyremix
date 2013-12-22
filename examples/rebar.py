@@ -1,4 +1,4 @@
-import remix
+import pyremix
 import sys
 
 def rebar(inpath, outpath):
@@ -6,7 +6,7 @@ def rebar(inpath, outpath):
         reorder the beats in each bar so that they are in
         descending loudness order
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
     track = remixer.analyze_track(inpath)
 
     song = []

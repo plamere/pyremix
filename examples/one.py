@@ -1,4 +1,4 @@
-import remix
+import pyremix
 import sys
 
 def one(inpath, outpath):
@@ -6,7 +6,7 @@ def one(inpath, outpath):
         render a new version of the input song that consists
         of just the first beat of every bar
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
 
     track = remixer.analyze_track(inpath)
     beats = []

@@ -1,4 +1,4 @@
-import remix
+import pyremix
 import sys
 
 def reverse(inpath, outpath):
@@ -6,7 +6,7 @@ def reverse(inpath, outpath):
         render a new version of the input song that consists
         of the beats in reverse order
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
     track = remixer.analyze_track(inpath)
     beats = track['analysis']['beats']
     beats.reverse()

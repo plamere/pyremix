@@ -1,12 +1,12 @@
 
-import remix
+import pyremix
 import sys
 
 def pq(inpath, type):
     '''
         prints out the quanta of the given type
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
     track = remixer.analyze_track(inpath)
     for q in track['analysis'][type]:
         remixer.print_quanta(q)

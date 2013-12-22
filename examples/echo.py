@@ -1,11 +1,11 @@
-import remix
+import pyremix
 import sys
 
 def echo(inpath, outpath):
     '''
         echos each beat with a quieter version of the beat
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
 
     track = remixer.analyze_track(inpath)
     out = []

@@ -1,11 +1,11 @@
-import remix
+import pyremix
 import sys
 
 def breverse(inpath, outpath):
     '''
         reverse each beat of audio
     '''
-    remixer = remix.Remix(trace=True)
+    remixer = pyremix.Remix(trace=True)
     track = remixer.analyze_track(inpath)
     beats = track['analysis']['tatums']
     out = []
