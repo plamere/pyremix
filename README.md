@@ -26,13 +26,13 @@ Reversing a song, beat by beat:
     beats.reverse()
     remixer.render(beats).export("backwards.mp3")
     
-    Here's the input:
+Here's the input:
 
-    <audio src="audio/BadRomanceClip.mp3">
+   <audio src="audio/BadRomanceClip.mp3">
     
-    Here's the output:
+Here's the output:
 
-    <audio src="audio/BadRomanceClip.mp3">
+   <audio src="audio/BadRomanceClip.mp3">
     
     
 
