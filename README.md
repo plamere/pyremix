@@ -19,6 +19,7 @@ which you can find on [github](http://echonest.github.io/remix/).
 
 Reversing a song, beat by beat:
 
+```python
 	import pyremix
 	
     remixer = pyremix.Remix()
@@ -26,19 +27,22 @@ Reversing a song, beat by beat:
     beats = track['analysis']['beats']
     beats.reverse()
     remixer.render(beats).export("backwards.mp3")
+```
     
 Here's the input (BadRomanceClip.mp3): 
 
-<audio src="http://static.echonest.com/pyremix/audio/BadRomanceClip.mp3" controls/>. 
+<a href="http://static.echonest.com/pyremix/audio/BadRomanceClip.mp3"/>BadRomanceClip.mp3</a>
 
 Here's the output (backwards.mp3):
 
-<audio src="http://static.echonest.com/pyremix/audio/backwards.mp3" controls/> 
+<a href="http://static.echonest.com/pyremix/audio/backwards.mp3">Backwards.mp3</a>
     
     
 ### One
 
 Here's the classic 'one.py' that makes a new song that consists of just the first beats of every bar of the source song.
+
+```python
 
     import pyremix
 
@@ -51,12 +55,13 @@ Here's the classic 'one.py' that makes a new song that consists of just the firs
             if beat['index_in_parent'] == 0:
                 beats.append(beat)
         remixer.render(beats).export(outpath)
+```
 
 More examples can be found in the [examples](https://github.com/plamere/pyremix/tree/master/examples) directory in the Github repository.
 
 Here's some sample output (beat1_romance.mp3):
 
-<div><audio src="http://static.echonest.com/pyremix/audio/beat1_romance.mp3" controls/></div>
+<a href="http://static.echonest.com/pyremix/audio/beat1_romance.mp3">beat1_romance.mp3</a>
 
 ### Blip
 
@@ -77,7 +82,7 @@ remixer.render(song).export(outpath)
 
 Example output:
 
-<audio src="http://static.echonest.com/pyremix/audio/blip_romance.mp3" controls/> 
+<a href="http://static.echonest.com/pyremix/audio/beat1_romance.mp3">blip_romance.mp3</a>
 
 ## Documentation
 
@@ -95,8 +100,8 @@ pyremix depends on the following libraries
 ## TODO
 There's still lots to do:
 
-- Add DIRAC support for time stretching and pitch shifting
-- Fill out the examples to include all examples from remix
-- Improve the docs
+ - [ ] Add DIRAC support for time stretching and pitch shifting
+ - [ ] Fill out the examples to include all examples from remix
+ - [ ] Improve the docs
 
 
